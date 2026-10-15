@@ -1,0 +1,181 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Student {
+  id                  String         @id @default(cuid())
+  prn                 String         @unique
+  name                String
+  email               String         @unique
+  passwordHash        String         @map("password_hash")
+  department          String
+  classYear           Int            @map("class_year")
+  division            String?
+  createdAt           DateTime       @default(now()) @map("created_at")
+  updatedAt           DateTime       @updatedAt @map("updated_at")
+  teamMemberships     TeamMember[]
+  studentSkills       StudentSkill[]
+  createdProjects     Project[]
+  joinRequests        JoinRequest[]
+  sentInvitations     Invitation[]   @relation("SentInvitations")
+  receivedInvitations Invitation[]   @relation("ReceivedInvitations")
+
+  @@map("students")
+}
+
+model Skill {
+  id                  String                 @id @default(cuid())
+  name                String                 @unique
+  category            String
+  studentSkills       StudentSkill[]
+  projectRequirements ProjectRequiredSkill[]
+
+  @@map("skills")
+}
+
+model StudentSkill {
+  studentId   String @map("student_id")
+  skillId     String @map("skill_id")
+  proficiency Int
+
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  skill   Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([studentId, skillId])
+  @@map("student_skills")
+}
+
+enum ProjectStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Project {
+  id             String                 @id @default(cuid())
+  title          String
+  description    String
+  status         ProjectStatus          @default(OPEN)
+  creatorId      String                 @map("creator_id")
+  createdAt      DateTime               @default(now()) @map("created_at")
+  updatedAt      DateTime               @updatedAt @map("updated_at")
+  team           Team?
+  requiredSkills ProjectRequiredSkill[]
+
+  creator Student @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  @@index([creatorId])
+  @@index([status])
+  @@map("projects")
+}
+
+enum SkillImportance {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model ProjectRequiredSkill {
+  projectId  String          @map("project_id")
+  skillId    String          @map("skill_id")
+  importance SkillImportance @default(MEDIUM)
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  skill   Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, skillId])
+  @@map("project_required_skills")
+}
+
+model Team {
+  id           String        @id @default(cuid())
+  projectId    String        @unique @map("project_id")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  members      TeamMember[]
+  invitations  Invitation[]
+  joinRequests JoinRequest[]
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("teams")
+}
+
+enum TeamRole {
+  CREATOR
+  MEMBER
+}
+
+model TeamMember {
+  teamId    String   @map("team_id")
+  studentId String   @map("student_id")
+  role      TeamRole @default(MEMBER)
+  joinedAt  DateTime @default(now()) @map("joined_at")
+
+  team    Team    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@id([teamId, studentId])
+  @@index([studentId])
+  @@map("team_members")
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+model Invitation {
+  id        String           @id @default(cuid())
+  teamId    String           @map("team_id")
+  inviterId String           @map("inviter_id")
+  inviteeId String           @map("invitee_id")
+  status    InvitationStatus @default(PENDING)
+  createdAt DateTime         @default(now()) @map("created_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+
+  team    Team    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  inviter Student @relation("SentInvitations", fields: [inviterId], references: [id], onDelete: Cascade)
+  invitee Student @relation("ReceivedInvitations", fields: [inviteeId], references: [id], onDelete: Cascade)
+
+  @@index([teamId, status])
+  @@index([inviteeId, status])
+  @@map("invitations")
+}
+
+enum JoinRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
+}
+
+model JoinRequest {
+  id        String            @id @default(cuid())
+  teamId    String            @map("team_id")
+  studentId String            @map("student_id")
+  status    JoinRequestStatus @default(PENDING)
+  message   String?
+  createdAt DateTime          @default(now()) @map("created_at")
+  updatedAt DateTime          @updatedAt @map("updated_at")
+
+  team    Team    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([teamId, status])
+  @@index([studentId, status])
+  @@map("join_requests")
+}

@@ -1,0 +1,20 @@
+
+# AI editor and agent-specific configuration
+.agents/
+.claude/
+.windsurf/
+
+# Dependencies
+node_modules/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Generated client
+/generated/prisma/
+
+# Logs and coverage
+coverage/
+npm-debug.log*
