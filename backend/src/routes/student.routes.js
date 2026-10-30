@@ -18,4 +18,11 @@ router.delete(
     studentController.deleteStudentSkill
 );
 
+// Get skills selected by logged-in student
+router.get(
+    "/me/skills",
+    authenticateStudent,
+    studentController.getStudentSkills
+);
+
 module.exports = router;

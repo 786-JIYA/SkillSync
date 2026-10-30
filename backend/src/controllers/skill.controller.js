@@ -10,11 +10,13 @@ const getAllSkills = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Get skills error:", error);
+        console.error("Get all skills error:", error);
 
-        return res.status(500).json({
+        return res.status(error.statusCode || 500).json({
             success: false,
-            message: "Failed to fetch skills"
+            message: error.statusCode
+                ? error.message
+                : "Internal server error"
         });
     }
 };
