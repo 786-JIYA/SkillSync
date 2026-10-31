@@ -2,6 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth.routes");
+const skillRoutes = require('./routes/skill.routes');
+const studentRoutes = require("./routes/student.routes");
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/skills", skillRoutes);
+app.use("/api/v1/students", studentRoutes);
 
 module.exports = app;
 
