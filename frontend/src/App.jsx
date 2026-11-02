@@ -5,6 +5,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import SkillsPage from './pages/SkillsPage.jsx'
 import './App.css'
 
 function AppRoutes() {
@@ -41,6 +42,15 @@ function AppRoutes() {
       />
 
       <Route
+        path="/skills"
+        element={
+          <ProtectedRoute>
+            <SkillsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
         path="/dashboard"
         element={
           <ProtectedRoute>
@@ -50,6 +60,9 @@ function AppRoutes() {
       />
 
       <Route path="*" element={<Navigate to="/" replace />} />
+
+
+
     </Routes>
   )
 }

@@ -1,0 +1,516 @@
+* {
+    box-sizing: border-box;
+}
+
+.dashboard-layout {
+    min-height: 100vh;
+    display: flex;
+    background: #f6f7fb;
+    color: #20243a;
+    font-family: Inter, system-ui, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #171b35;
+    color: white;
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 22px;
+    font-weight: 750;
+    padding: 0 10px;
+    margin-bottom: 55px;
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: #7775ed;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.sidebar-label {
+    color: #858aa9;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    padding: 0 12px;
+}
+
+.sidebar-nav {
+    display: grid;
+    gap: 9px;
+}
+
+.nav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 14px;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    color: #c2c5d7;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.nav-item>span {
+    font-size: 19px;
+}
+
+.nav-item.active,
+.nav-item:not(:disabled):hover {
+    background: #34385b;
+    color: white;
+}
+
+.nav-item:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.nav-item small {
+    margin-left: auto;
+    font-size: 10px;
+    color: #a6a9c0;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 15px 5px;
+    border-top: 1px solid #353952;
+}
+
+.user-avatar,
+.profile-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e8e7ff;
+    color: #625fd2;
+    font-weight: 750;
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+}
+
+.user-info {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+}
+
+.user-info strong {
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info span {
+    font-size: 11px;
+    color: #aeb2c8;
+}
+
+.logout-button {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444965;
+    border-radius: 8px;
+    color: #f1b6bc;
+    background: transparent;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: #34385b;
+}
+
+/* Main content */
+.dashboard-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.topbar {
+    height: 85px;
+    padding: 0 42px;
+    background: white;
+    border-bottom: 1px solid #ececf2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.breadcrumb {
+    margin: 0 0 5px;
+    color: #9396a8;
+    font-size: 12px;
+}
+
+.topbar h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.topbar-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.dashboard-content {
+    max-width: 1250px;
+    padding: 35px 42px;
+    margin: auto;
+}
+
+/* Welcome banner */
+.welcome-banner {
+    position: relative;
+    overflow: hidden;
+    min-height: 230px;
+    padding: 34px 40px;
+    border-radius: 16px;
+    color: white;
+    background: linear-gradient(115deg, #514fc2, #7775e8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-tag {
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 2px;
+    color: #d8d7ff;
+}
+
+.welcome-banner h1 {
+    font-size: clamp(24px, 3vw, 34px);
+    margin: 13px 0 9px;
+}
+
+.welcome-banner p:not(.welcome-tag) {
+    max-width: 530px;
+    color: #e5e4ff;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.primary-button {
+    margin-top: 13px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    background: white;
+    color: #5552c7;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primary-button span {
+    margin-left: 12px;
+}
+
+.primary-button:hover {
+    background: #f0efff;
+}
+
+.welcome-decoration {
+    font-size: 145px;
+    color: #ffffff24;
+    padding-right: 30px;
+}
+
+/* Sections and cards */
+.section-heading {
+    margin: 34px 0 18px;
+}
+
+.section-heading h2 {
+    margin: 0 0 6px;
+    font-size: 19px;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #9295a6;
+    font-size: 13px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.overview-card {
+    min-width: 0;
+    min-height: 155px;
+    padding: 20px;
+    border: 1px solid #ececf3;
+    border-radius: 13px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    text-align: left;
+    position: relative;
+}
+
+button.overview-card {
+    cursor: pointer;
+    color: inherit;
+}
+
+button.overview-card:hover {
+    border-color: #aaa8f4;
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+}
+
+.overview-icon {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.skills-icon {
+    background: #eeedff;
+    color: #6663d6;
+}
+
+.projects-icon {
+    background: #e6f5f1;
+    color: #299b7d;
+}
+
+.profile-icon {
+    background: #fff1e6;
+    color: #d88b46;
+}
+
+.overview-card h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+}
+
+.overview-card p {
+    margin: 0;
+    color: #9295a6;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.card-arrow {
+    position: absolute;
+    right: 20px;
+    top: 23px;
+    color: #7775e8;
+}
+
+.coming-soon {
+    display: inline-block;
+    margin-top: 9px;
+    font-size: 10px;
+    color: #8b89d8;
+    background: #f0efff;
+    border-radius: 20px;
+    padding: 4px 9px;
+}
+
+.disabled-card {
+    opacity: 0.85;
+}
+
+.profile-heading {
+    margin-top: 38px;
+}
+
+/* Student details */
+.student-profile-card {
+    background: white;
+    border: 1px solid #ececf3;
+    border-radius: 13px;
+    padding: 23px;
+}
+
+.profile-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #eeeeF4;
+}
+
+.profile-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 20px;
+}
+
+.profile-card-header h3 {
+    margin: 0 0 5px;
+    font-size: 15px;
+}
+
+.profile-card-header p {
+    margin: 0;
+    color: #9295a6;
+    font-size: 12px;
+}
+
+.account-status {
+    margin-left: auto;
+    color: #299b7d;
+    background: #e9f8f2;
+    border-radius: 20px;
+    padding: 7px 11px;
+    font-size: 10px;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    padding-top: 23px;
+}
+
+.detail-item {
+    display: grid;
+    gap: 8px;
+}
+
+.detail-item span {
+    color: #9295a6;
+    font-size: 11px;
+}
+
+.detail-item strong {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.dashboard-footer {
+    text-align: center;
+    color: #a0a2b0;
+    font-size: 11px;
+    padding: 35px 0 5px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 205px;
+    }
+
+    .dashboard-content {
+        padding: 28px 22px;
+    }
+
+    .topbar {
+        padding: 0 22px;
+    }
+
+    .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .dashboard-layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 15px;
+    }
+
+    .brand {
+        margin-bottom: 15px;
+    }
+
+    .sidebar-label,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .nav-item {
+        width: auto;
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+    .topbar {
+        height: 70px;
+        padding: 0 17px;
+    }
+
+    .topbar-profile span {
+        display: none;
+    }
+
+    .dashboard-content {
+        padding: 20px 15px;
+    }
+
+    .welcome-banner {
+        padding: 25px 22px;
+    }
+
+    .welcome-decoration {
+        display: none;
+    }
+
+    .overview-grid,
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card-header {
+        flex-wrap: wrap;
+    }
+
+    .account-status {
+        margin-left: 0;
+    }
+}
