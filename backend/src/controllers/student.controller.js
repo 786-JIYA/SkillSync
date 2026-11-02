@@ -74,9 +74,13 @@ const getStudentSkills = async (req, res) => {
     } catch (error) {
         console.error("Get student skills error:", error);
 
-        return res.status(500).json({
+        const statusCode = error.statusCode || 500;
+
+        return res.status(statusCode).json({
             success: false,
-            message: "Failed to fetch student skills"
+            message: statusCode === 500
+                ? "Internal server error"
+                : error.message
         });
     }
 };

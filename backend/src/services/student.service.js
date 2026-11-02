@@ -1,12 +1,10 @@
 
 const prisma = require("../lib/prisma");
 
-// Add or update a skill for the logged-in student
-const addStudentSkill = async (studentId, skillId, proficiency) => {
 
+const addStudentSkill = async (studentId, skillId, proficiency) => {
     // Validate skill ID
     if (
-        !skillId ||
         typeof skillId !== "string" ||
         !skillId.trim()
     ) {
@@ -28,10 +26,12 @@ const addStudentSkill = async (studentId, skillId, proficiency) => {
         throw error;
     }
 
+    const normalizedSkillId = skillId.trim();
+
     // Check whether the skill exists
     const skill = await prisma.skill.findUnique({
         where: {
-            id: skillId
+            id: normalizedSkillId
         }
     });
 
@@ -41,21 +41,21 @@ const addStudentSkill = async (studentId, skillId, proficiency) => {
         throw error;
     }
 
-    // Add the skill or update its proficiency if already selected
+    // Add the skill or update its proficiency
     const studentSkill = await prisma.studentSkill.upsert({
         where: {
             studentId_skillId: {
-                studentId: studentId,
-                skillId: skillId
+                studentId,
+                skillId: normalizedSkillId
             }
         },
         update: {
-            proficiency: proficiency
+            proficiency
         },
         create: {
-            studentId: studentId,
-            skillId: skillId,
-            proficiency: proficiency
+            studentId,
+            skillId: normalizedSkillId,
+            proficiency
         }
     });
 
@@ -63,12 +63,9 @@ const addStudentSkill = async (studentId, skillId, proficiency) => {
 };
 
 
-// Delete a skill selected by the logged-in student
 const deleteStudentSkill = async (studentId, skillId) => {
-
     // Validate skill ID
     if (
-        !skillId ||
         typeof skillId !== "string" ||
         !skillId.trim()
     ) {
@@ -81,8 +78,8 @@ const deleteStudentSkill = async (studentId, skillId) => {
     await prisma.studentSkill.delete({
         where: {
             studentId_skillId: {
-                studentId: studentId,
-                skillId: skillId
+                studentId,
+                skillId: skillId.trim()
             }
         }
     });
@@ -91,9 +88,8 @@ const deleteStudentSkill = async (studentId, skillId) => {
 };
 
 
-// Get all skills selected by the logged-in student
-const getStudentSkills = async (studentId) => {
-
+// Get all skills selected by the logged-in studentconst 
+getStudentSkills = async (studentId) => {
     const studentSkills = await prisma.studentSkill.findMany({
         where: {
             studentId: studentId
