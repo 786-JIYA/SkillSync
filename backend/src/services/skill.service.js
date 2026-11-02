@@ -4,6 +4,20 @@ const prisma = require("../lib/prisma");
 const getAllSkills = async (query) => {
     const { search, category } = query;
 
+    // Validate search parameter
+    if (search !== undefined && typeof search !== "string") {
+        const error = new Error("Search must be a string");
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // Validate category parameter
+    if (category !== undefined && typeof category !== "string") {
+        const error = new Error("Category must be a string");
+        error.statusCode = 400;
+        throw error;
+    }
+
     // Get pagination values
     const page = Number(query.page ?? 1);
     const limit = Number(query.limit ?? 20);
@@ -30,15 +44,18 @@ const getAllSkills = async (query) => {
     // Build search and category filters
     const where = {};
 
-    if (search) {
+    const trimmedSearch = search?.trim();
+    const trimmedCategory = category?.trim();
+
+    if (trimmedSearch) {
         where.name = {
-            contains: search.trim(),
+            contains: trimmedSearch,
             mode: "insensitive"
         };
     }
 
-    if (category) {
-        where.category = category.trim();
+    if (trimmedCategory) {
+        where.category = trimmedCategory;
     }
 
     // Fetch skills and total count together
