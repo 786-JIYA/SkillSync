@@ -62,13 +62,15 @@ enum ProjectStatus {
 }
 
 model Project {
-  id             String                 @id @default(cuid())
-  title          String
-  description    String
-  status         ProjectStatus          @default(OPEN)
-  creatorId      String                 @map("creator_id")
-  createdAt      DateTime               @default(now()) @map("created_at")
-  updatedAt      DateTime               @updatedAt @map("updated_at")
+  id                String        @id @default(cuid())
+  title             String
+  description       String
+  preferredTeamSize Int           @map("preferred_team_size")
+  status            ProjectStatus @default(OPEN)
+  creatorId         String        @map("creator_id")
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
   team           Team?
   requiredSkills ProjectRequiredSkill[]
 
@@ -80,16 +82,14 @@ model Project {
 }
 
 enum SkillImportance {
-  LOW
-  MEDIUM
-  HIGH
-  CRITICAL
+  REQUIRED
+  NICE_TO_HAVE
 }
 
 model ProjectRequiredSkill {
   projectId  String          @map("project_id")
   skillId    String          @map("skill_id")
-  importance SkillImportance @default(MEDIUM)
+  importance SkillImportance @default(NICE_TO_HAVE)
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   skill   Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
