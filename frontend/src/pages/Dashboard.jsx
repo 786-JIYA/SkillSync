@@ -18,6 +18,7 @@ function Dashboard() {
     }
 
     const firstName = student?.name?.split(' ')[0] || 'Student'
+    const avatarLetter = firstName.charAt(0).toUpperCase()
 
     return (
         <div className="dashboard-layout">
@@ -30,7 +31,10 @@ function Dashboard() {
                 <p className="sidebar-label">MENU</p>
 
                 <nav className="sidebar-nav">
-                    <button className="nav-item active">
+                    <button
+                        className="nav-item active"
+                        onClick={() => navigate('/dashboard')}
+                    >
                         <span>⌂</span> Overview
                     </button>
 
@@ -41,9 +45,11 @@ function Dashboard() {
                         <span>✦</span> My Skills
                     </button>
 
-                    <button className="nav-item" disabled>
+                    <button
+                        className="nav-item"
+                        onClick={() => navigate('/projects')}
+                    >
                         <span>▣</span> Projects
-                        <small>Soon</small>
                     </button>
 
                     <button className="nav-item" disabled>
@@ -54,16 +60,18 @@ function Dashboard() {
 
                 <div className="sidebar-bottom">
                     <div className="sidebar-user">
-                        <div className="user-avatar">
-                            {firstName.charAt(0).toUpperCase()}
-                        </div>
+                        <div className="user-avatar">{avatarLetter}</div>
+
                         <div className="user-info">
                             <strong>{student?.name || 'Student'}</strong>
                             <span>{department || 'Student'}</span>
                         </div>
                     </div>
 
-                    <button className="logout-button" onClick={handleLogout}>
+                    <button
+                        className="logout-button"
+                        onClick={handleLogout}
+                    >
                         ↪ Logout
                     </button>
                 </div>
@@ -75,10 +83,9 @@ function Dashboard() {
                         <p className="breadcrumb">Pages / Overview</p>
                         <h2>Dashboard</h2>
                     </div>
+
                     <div className="topbar-profile">
-                        <div className="user-avatar">
-                            {firstName.charAt(0).toUpperCase()}
-                        </div>
+                        <div className="user-avatar">{avatarLetter}</div>
                         <span>{student?.name || 'Student'}</span>
                     </div>
                 </header>
@@ -88,10 +95,12 @@ function Dashboard() {
                         <div>
                             <p className="welcome-tag">YOUR LEARNING SPACE</p>
                             <h1>Welcome back, {firstName}! 👋</h1>
+
                             <p>
                                 Build your skills, discover projects, and
                                 connect your learning with real opportunities.
                             </p>
+
                             <button
                                 className="primary-button"
                                 onClick={() => navigate('/skills')}
@@ -116,24 +125,35 @@ function Dashboard() {
                             onClick={() => navigate('/skills')}
                         >
                             <div className="overview-icon skills-icon">✦</div>
+
                             <div>
                                 <h3>My Skills</h3>
                                 <p>Manage your technical and soft skills.</p>
                             </div>
+
+                            <span className="card-arrow">→</span>
+                        </button>
+
+                        <button
+                            className="overview-card"
+                            onClick={() => navigate('/projects')}
+                        >
+                            <div className="overview-icon projects-icon">▣</div>
+
+                            <div>
+                                <h3>Projects</h3>
+                                <p>
+                                    Discover projects, explore required skills,
+                                    and create your own team project.
+                                </p>
+                            </div>
+
                             <span className="card-arrow">→</span>
                         </button>
 
                         <div className="overview-card disabled-card">
-                            <div className="overview-icon projects-icon">▣</div>
-                            <div>
-                                <h3>Projects</h3>
-                                <p>Discover and collaborate on projects.</p>
-                                <span className="coming-soon">Coming soon</span>
-                            </div>
-                        </div>
-
-                        <div className="overview-card disabled-card">
                             <div className="overview-icon profile-icon">◉</div>
+
                             <div>
                                 <h3>My Profile</h3>
                                 <p>Keep your student information updated.</p>
@@ -151,14 +171,16 @@ function Dashboard() {
 
                     <section className="student-profile-card">
                         <div className="profile-card-header">
-                            <div className="profile-avatar">
-                                {firstName.charAt(0).toUpperCase()}
-                            </div>
+                            <div className="profile-avatar">{avatarLetter}</div>
+
                             <div>
                                 <h3>{student?.name || 'Student'}</h3>
                                 <p>{student?.email || 'Email not available'}</p>
                             </div>
-                            <span className="account-status">● Active account</span>
+
+                            <span className="account-status">
+                                ● Active account
+                            </span>
                         </div>
 
                         <div className="profile-details">
@@ -166,14 +188,17 @@ function Dashboard() {
                                 <span>PRN</span>
                                 <strong>{student?.prn || '—'}</strong>
                             </div>
+
                             <div className="detail-item">
                                 <span>Department</span>
                                 <strong>{department || '—'}</strong>
                             </div>
+
                             <div className="detail-item">
                                 <span>Class Year</span>
                                 <strong>{student?.classYear ?? '—'}</strong>
                             </div>
+
                             <div className="detail-item">
                                 <span>Division</span>
                                 <strong>{student?.division || 'Not specified'}</strong>
