@@ -5,6 +5,7 @@ const authRoutes = require("./routes/auth.routes");
 const skillRoutes = require('./routes/skill.routes');
 const studentRoutes = require("./routes/student.routes");
 const projectRoutes = require("./routes/project.routes");
+const teamRoutes = require("./routes/team.routes");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/skills", skillRoutes);
 app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/projects", projectRoutes);
+app.use("/api/v1/teams", teamRoutes);
 
 module.exports = app;
 
