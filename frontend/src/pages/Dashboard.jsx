@@ -1,24 +1,24 @@
 
-import { useAuth } from '../context/AuthContext.jsx'
-import { useNavigate } from 'react-router-dom'
-import './Dashboard.css'
+import { useAuth } from "../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 function Dashboard() {
-    const { student, logout } = useAuth()
-    const navigate = useNavigate()
+    const { student, logout } = useAuth();
+    const navigate = useNavigate();
 
     const department =
-        typeof student?.department === 'object'
+        typeof student?.department === "object"
             ? student?.department?.name
-            : student?.department
+            : student?.department;
 
     function handleLogout() {
-        logout()
-        navigate('/login', { replace: true })
+        logout();
+        navigate("/login", { replace: true });
     }
 
-    const firstName = student?.name?.split(' ')[0] || 'Student'
-    const avatarLetter = firstName.charAt(0).toUpperCase()
+    const firstName = student?.name?.split(" ")[0] || "Student";
+    const avatarLetter = firstName.charAt(0).toUpperCase();
 
     return (
         <div className="dashboard-layout">
@@ -33,28 +33,37 @@ function Dashboard() {
                 <nav className="sidebar-nav">
                     <button
                         className="nav-item active"
-                        onClick={() => navigate('/dashboard')}
+                        onClick={() => navigate("/dashboard")}
                     >
                         <span>⌂</span> Overview
                     </button>
 
                     <button
                         className="nav-item"
-                        onClick={() => navigate('/skills')}
+                        onClick={() => navigate("/profile")}
+                    >
+                        <span>◉</span> My Profile
+                    </button>
+
+                    <button
+                        className="nav-item"
+                        onClick={() => navigate("/skills")}
                     >
                         <span>✦</span> My Skills
                     </button>
 
                     <button
                         className="nav-item"
-                        onClick={() => navigate('/projects')}
+                        onClick={() => navigate("/projects")}
                     >
-                        <span>▣</span> Projects
+                        <span>▣</span> Browse Projects
                     </button>
 
-                    <button className="nav-item" disabled>
-                        <span>◉</span> My Profile
-                        <small>Soon</small>
+                    <button
+                        className="nav-item"
+                        onClick={() => navigate("/my-activity")}
+                    >
+                        <span>✉</span> My Activity
                     </button>
                 </nav>
 
@@ -63,8 +72,8 @@ function Dashboard() {
                         <div className="user-avatar">{avatarLetter}</div>
 
                         <div className="user-info">
-                            <strong>{student?.name || 'Student'}</strong>
-                            <span>{department || 'Student'}</span>
+                            <strong>{student?.name || "Student"}</strong>
+                            <span>{department || "Student"}</span>
                         </div>
                     </div>
 
@@ -84,9 +93,17 @@ function Dashboard() {
                         <h2>Dashboard</h2>
                     </div>
 
-                    <div className="topbar-profile">
+                    <div
+                        className="topbar-profile"
+                        onClick={() => navigate("/profile")}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") navigate("/profile");
+                        }}
+                    >
                         <div className="user-avatar">{avatarLetter}</div>
-                        <span>{student?.name || 'Student'}</span>
+                        <span>{student?.name || "Student"}</span>
                     </div>
                 </header>
 
@@ -103,7 +120,7 @@ function Dashboard() {
 
                             <button
                                 className="primary-button"
-                                onClick={() => navigate('/skills')}
+                                onClick={() => navigate("/skills")}
                             >
                                 Explore My Skills <span>→</span>
                             </button>
@@ -122,44 +139,69 @@ function Dashboard() {
                     <div className="overview-grid">
                         <button
                             className="overview-card"
-                            onClick={() => navigate('/skills')}
+                            onClick={() => navigate("/skills")}
                         >
                             <div className="overview-icon skills-icon">✦</div>
-
                             <div>
                                 <h3>My Skills</h3>
                                 <p>Manage your technical and soft skills.</p>
                             </div>
-
                             <span className="card-arrow">→</span>
                         </button>
 
                         <button
                             className="overview-card"
-                            onClick={() => navigate('/projects')}
+                            onClick={() => navigate("/projects")}
                         >
                             <div className="overview-icon projects-icon">▣</div>
-
                             <div>
-                                <h3>Projects</h3>
+                                <h3>Browse Projects</h3>
                                 <p>
                                     Discover projects, explore required skills,
-                                    and create your own team project.
+                                    and find collaboration opportunities.
                                 </p>
                             </div>
-
                             <span className="card-arrow">→</span>
                         </button>
 
-                        <div className="overview-card disabled-card">
+                        <button
+                            className="overview-card"
+                            onClick={() => navigate("/profile")}
+                        >
                             <div className="overview-icon profile-icon">◉</div>
-
                             <div>
                                 <h3>My Profile</h3>
-                                <p>Keep your student information updated.</p>
-                                <span className="coming-soon">Coming soon</span>
+                                <p>View your academic and personal details.</p>
                             </div>
-                        </div>
+                            <span className="card-arrow">→</span>
+                        </button>
+
+                        <button
+                            className="overview-card"
+                            onClick={() => navigate("/my-activity")}
+                        >
+                            <div className="overview-icon profile-icon">✉</div>
+                            <div>
+                                <h3>My Activity</h3>
+                                <p>
+                                    Track received invitations and your join
+                                    requests.
+                                </p>
+                            </div>
+                            <span className="card-arrow">→</span>
+                        </button>
+
+                        <button
+                            className="overview-card"
+                            onClick={() => navigate("/projects/create")}
+                        >
+                            <div className="overview-icon projects-icon">+</div>
+                            <div>
+                                <h3>Create Project</h3>
+                                <p>Share your idea and build a project team.</p>
+                            </div>
+                            <span className="card-arrow">→</span>
+                        </button>
                     </div>
 
                     <div className="section-heading profile-heading">
@@ -167,6 +209,12 @@ function Dashboard() {
                             <h2>Student Information</h2>
                             <p>Your registered account details.</p>
                         </div>
+                        <button
+                            className="profile-view-button"
+                            onClick={() => navigate("/profile")}
+                        >
+                            View Profile →
+                        </button>
                     </div>
 
                     <section className="student-profile-card">
@@ -174,8 +222,8 @@ function Dashboard() {
                             <div className="profile-avatar">{avatarLetter}</div>
 
                             <div>
-                                <h3>{student?.name || 'Student'}</h3>
-                                <p>{student?.email || 'Email not available'}</p>
+                                <h3>{student?.name || "Student"}</h3>
+                                <p>{student?.email || "Email not available"}</p>
                             </div>
 
                             <span className="account-status">
@@ -186,22 +234,22 @@ function Dashboard() {
                         <div className="profile-details">
                             <div className="detail-item">
                                 <span>PRN</span>
-                                <strong>{student?.prn || '—'}</strong>
+                                <strong>{student?.prn || "—"}</strong>
                             </div>
 
                             <div className="detail-item">
                                 <span>Department</span>
-                                <strong>{department || '—'}</strong>
+                                <strong>{department || "—"}</strong>
                             </div>
 
                             <div className="detail-item">
                                 <span>Class Year</span>
-                                <strong>{student?.classYear ?? '—'}</strong>
+                                <strong>{student?.classYear ?? "—"}</strong>
                             </div>
 
                             <div className="detail-item">
                                 <span>Division</span>
-                                <strong>{student?.division || 'Not specified'}</strong>
+                                <strong>{student?.division || "Not specified"}</strong>
                             </div>
                         </div>
                     </section>
@@ -212,7 +260,7 @@ function Dashboard() {
                 </section>
             </main>
         </div>
-    )
+    );
 }
 
-export default Dashboard
+export default Dashboard;

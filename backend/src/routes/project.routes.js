@@ -18,6 +18,13 @@ router.get(
     projectController.getAllProjects
 );
 
+// GET /api/v1/projects/me
+router.get(
+    "/me",
+    authenticateStudent,
+    projectController.getMyProjects
+);
+
 router.get(
     "/:projectId",
     authenticateStudent,

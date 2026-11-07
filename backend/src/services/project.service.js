@@ -297,6 +297,23 @@ const getAllProjects = async (query) => {
     };
 };
 
+const getMyProjects = async (studentId) => {
+    return prisma.project.findMany({
+        where: {
+            creatorId: studentId,
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+        include: {
+            team: {
+                select: {
+                    id: true,
+                },
+            },
+        },
+    });
+};
 
 const getProjectById = async (projectId) => {
     const project = await prisma.project.findUnique({
@@ -612,6 +629,7 @@ const replaceRequiredSkills = async (
 module.exports = {
     createProject,
     getAllProjects,
+    getMyProjects,
     getProjectById,
     updateProject,
     replaceRequiredSkills

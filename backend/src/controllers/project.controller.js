@@ -52,6 +52,28 @@ const getAllProjects = async (req, res) => {
     }
 };
 
+const getMyProjects = async (req, res) => {
+    try {
+        const projects = await projectService.getMyProjects(
+            req.student.id
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Your projects fetched successfully",
+            data: projects,
+        });
+    } catch (error) {
+        console.error("Get my projects error:", error);
+
+        return res.status(error.statusCode || 500).json({
+            success: false,
+            message: error.statusCode
+                ? error.message
+                : "Internal server error",
+        });
+    }
+};
 
 const getProjectById = async (req, res) => {
     try {
@@ -141,6 +163,7 @@ const replaceRequiredSkills = async (req, res) => {
 module.exports = {
     createProject,
     getAllProjects,
+    getMyProjects,
     getProjectById,
     updateProject,
     replaceRequiredSkills

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { projectService } from "../services/projectService";
 import { skillService } from "../services/skillService";
+import { matchingService } from "../services/matchingService";
 import "./BrowseProjects.css";
 
 function BrowseProjects() {
@@ -23,6 +24,10 @@ function BrowseProjects() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [refreshKey, setRefreshKey] = useState(0);
+
+    const [recommendations, setRecommendations] = useState([]);
+    const [recommendationsLoading, setRecommendationsLoading] = useState(true);
+    const [recommendationsError, setRecommendationsError] = useState("");
 
     useEffect(() => {
         async function loadSkills() {
@@ -77,6 +82,42 @@ function BrowseProjects() {
             active = false;
         };
     }, [token, page, search, status, skillId, refreshKey]);
+
+    useEffect(() => {
+        let active = true;
+
+        const loadRecommendations = async () => {
+            try {
+                setRecommendationsLoading(true);
+                setRecommendationsError("");
+
+                const result = await matchingService.getRecommendedProjects(
+                    token,
+                    { page: 1, limit: 3 }
+                );
+
+                if (active) {
+                    setRecommendations(result.data || []);
+                }
+            } catch (err) {
+                if (active) {
+                    setRecommendationsError(err.message);
+                }
+            } finally {
+                if (active) {
+                    setRecommendationsLoading(false);
+                }
+            }
+        };
+
+        if (token) {
+            loadRecommendations();
+        }
+
+        return () => {
+            active = false;
+        };
+    }, [token]);
 
     function handleFilterChange(callback, value) {
         callback(value);
@@ -187,6 +228,87 @@ function BrowseProjects() {
                             ))}
                         </select>
                     </div>
+
+                    {/* Recommended Projects */}
+                    <section className="recommended-section">
+                        <div className="recommended-heading">
+                            <div>
+                                <h2>Recommended for You</h2>
+                                <p>Projects matched with your skills</p>
+                            </div>
+                            <span className="recommended-badge">AI MATCHING</span>
+                        </div>
+
+                        {recommendationsLoading ? (
+                            <div className="recommended-loading">
+                                Finding projects that match your skills...
+                            </div>
+                        ) : recommendationsError ? (
+                            <div className="recommended-error">
+                                {recommendationsError}
+                            </div>
+                        ) : recommendations.length === 0 ? (
+                            <div className="recommended-empty">
+                                No recommendations available yet. Add more skills to your
+                                profile to improve your matches.
+                            </div>
+                        ) : (
+                            <div className="recommended-grid">
+                                {recommendations.map((item) => (
+                                    <article
+                                        className="recommended-card"
+                                        key={item.project.id}
+                                    >
+                                        <span className="recommended-score">
+                                            {Math.round(item.individualMatchScore)}% Match
+                                        </span>
+
+                                        <h3>{item.project.title}</h3>
+
+                                        <strong>Matched Skills</strong>
+                                        <div className="recommended-skills">
+                                            {item.matchedSkills?.length > 0 ? (
+                                                item.matchedSkills.map((skill) => (
+                                                    <span key={skill.skillId}>
+                                                        {skill.name}
+                                                    </span>
+                                                ))
+                                            ) : (
+                                                <span>No matched skills</span>
+                                            )}
+                                        </div>
+
+                                        {item.missingSkills?.length > 0 && (
+                                            <>
+                                                <strong>Skills to Improve</strong>
+                                                <div className="recommended-skills">
+                                                    {item.missingSkills.map((skill) => (
+                                                        <span key={skill.skillId}>
+                                                            {skill.name}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {item.explanation?.length > 0 && (
+                                            <p className="recommended-explanation">
+                                                {item.explanation[0]}
+                                            </p>
+                                        )}
+
+                                        <button
+                                            onClick={() =>
+                                                navigate(`/projects/${item.project.id}`)
+                                            }
+                                        >
+                                            View Project
+                                        </button>
+                                    </article>
+                                ))}
+                            </div>
+                        )}
+                    </section>
 
                     {loading && (
                         <div className="browse-message">

@@ -1,0 +1,272 @@
+.my-activity-page {
+    min-height: 100vh;
+    padding: 38px 24px 60px;
+    background: #f6f7fb;
+    color: #20243a;
+}
+
+.my-activity-container {
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.my-activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.my-activity-eyebrow {
+    color: #7564df;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.my-activity-header h1 {
+    margin: 10px 0;
+    font-size: 29px;
+}
+
+.my-activity-header p,
+.my-activity-section-heading p {
+    color: #85899a;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.my-activity-browse {
+    flex-shrink: 0;
+    padding: 11px 17px;
+    border-radius: 8px;
+    background: #7564df;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.my-activity-section {
+    margin-bottom: 40px;
+}
+
+.my-activity-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 17px;
+}
+
+.my-activity-section-heading h2 {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.my-activity-count {
+    display: grid;
+    place-items: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 9px;
+    border-radius: 50%;
+    background: #eeeaff;
+    color: #695bd0;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.my-activity-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 17px;
+}
+
+.my-activity-filters button {
+    padding: 8px 13px;
+    border: 1px solid #e5e6ee;
+    border-radius: 20px;
+    background: white;
+    color: #777b8b;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.my-activity-filters button.active {
+    border-color: #7564df;
+    background: #7564df;
+    color: white;
+}
+
+.my-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.my-activity-card {
+    padding: 20px;
+    border: 1px solid #e9eaf1;
+    border-radius: 12px;
+    background: white;
+}
+
+.my-activity-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 13px;
+}
+
+.activity-status {
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #f0f1f5;
+    color: #666b7c;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.status-pending {
+    background: #fff5df;
+    color: #a66a00;
+}
+
+.status-accepted {
+    background: #e6f7ed;
+    color: #24834a;
+}
+
+.status-rejected,
+.status-cancelled {
+    background: #fff0f0;
+    color: #c04444;
+}
+
+.activity-date {
+    color: #999cab;
+    font-size: 11px;
+}
+
+.my-activity-card h3 {
+    margin-bottom: 8px;
+    color: #20243a;
+    font-size: 16px;
+}
+
+.activity-description,
+.activity-message {
+    color: #85899a;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.activity-description strong {
+    color: #555a6b;
+}
+
+.activity-message {
+    margin-top: 9px;
+    padding: 10px 12px;
+    border-left: 3px solid #c7bff5;
+    background: #f8f7ff;
+}
+
+.activity-project-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #695bd0;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.activity-project-link:hover {
+    text-decoration: underline;
+}
+
+.activity-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 17px;
+}
+
+.activity-actions button {
+    padding: 9px 15px;
+    border: 0;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.activity-accept {
+    background: #7564df;
+    color: white;
+}
+
+.activity-reject {
+    background: #fff0f0;
+    color: #c04444;
+}
+
+.activity-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.my-activity-empty {
+    padding: 25px;
+    border: 1px solid #e9eaf1;
+    border-radius: 12px;
+    background: white;
+    color: #85899a;
+    text-align: center;
+    font-size: 13px;
+}
+
+.my-activity-error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 13px 16px;
+    border-radius: 9px;
+    background: #fff0f0;
+    color: #c04444;
+    font-size: 13px;
+}
+
+.my-activity-error button {
+    border: 0;
+    background: transparent;
+    color: #c04444;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+@media (max-width: 650px) {
+    .my-activity-page {
+        padding: 25px 15px 45px;
+    }
+
+    .my-activity-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .my-activity-header h1 {
+        font-size: 24px;
+    }
+
+    .my-activity-card {
+        padding: 16px;
+    }
+}

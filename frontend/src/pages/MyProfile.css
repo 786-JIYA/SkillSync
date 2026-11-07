@@ -1,0 +1,208 @@
+.my-profile-page {
+    min-height: 100vh;
+    padding: 40px 7%;
+    background: #f6f7fb;
+    color: #20243a;
+}
+
+.my-profile-header {
+    margin-bottom: 28px;
+}
+
+.profile-eyebrow {
+    margin: 0 0 9px;
+    color: #626bce;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.my-profile-header h1 {
+    margin: 0;
+    color: #171c35;
+    font-size: 32px;
+}
+
+.my-profile-header>div>p:last-child {
+    margin-top: 9px;
+    color: #7a8198;
+    font-size: 14px;
+}
+
+.profile-identity-card,
+.profile-details-card,
+.profile-skills-card {
+    padding: 25px;
+    border: 1px solid #e9eaf1;
+    border-radius: 15px;
+    background: #ffffff;
+}
+
+.profile-identity-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.profile-avatar {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    border-radius: 22px;
+    background: #e9eaff;
+    color: #5056b5;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.profile-identity-info h2 {
+    margin: 0;
+    color: #20243a;
+    font-size: 21px;
+}
+
+.profile-identity-info p {
+    margin: 7px 0 10px;
+    color: #7a8198;
+    font-size: 14px;
+}
+
+.profile-role {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #eef0ff;
+    color: #5056b5;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.profile-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.profile-section-heading h2,
+.profile-skills-content h2 {
+    margin: 0;
+    color: #20243a;
+    font-size: 19px;
+}
+
+.profile-section-heading p {
+    margin: 7px 0 0;
+    color: #858ba0;
+    font-size: 13px;
+}
+
+.profile-readonly-label {
+    padding: 6px 11px;
+    border-radius: 20px;
+    background: #f0f1f5;
+    color: #697087;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.profile-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.profile-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.profile-detail-item span {
+    color: #858ba0;
+    font-size: 12px;
+}
+
+.profile-detail-item strong {
+    color: #292e46;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.profile-skills-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.profile-skills-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: #eceeff;
+    color: #5056b5;
+    font-size: 23px;
+}
+
+.profile-skills-content {
+    flex: 1;
+}
+
+.profile-skills-content p {
+    max-width: 560px;
+    margin: 7px 0 0;
+    color: #858ba0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.profile-skills-link {
+    padding: 11px 16px;
+    border-radius: 9px;
+    background: #5056b5;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.profile-skills-link:hover {
+    background: #3e449d;
+}
+
+@media (max-width: 650px) {
+    .my-profile-page {
+        padding: 25px 5%;
+    }
+
+    .profile-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-skills-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .profile-skills-content {
+        flex-basis: calc(100% - 70px);
+    }
+
+    .profile-skills-link {
+        margin-left: 66px;
+    }
+}
