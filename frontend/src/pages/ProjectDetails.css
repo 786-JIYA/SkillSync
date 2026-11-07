@@ -407,3 +407,146 @@
         flex-direction: column;
     }
 }
+
+
+.join-request-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.join-request-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #dce1eb;
+    border-radius: 9px;
+    background: #fafbfe;
+    color: #20243a;
+    font: inherit;
+    resize: vertical;
+    outline: none;
+}
+
+.join-request-textarea:focus {
+    border-color: #5555c9;
+    box-shadow: 0 0 0 3px rgba(85, 85, 201, 0.1);
+}
+
+.join-request-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 9px;
+    background: #37378f;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.join-request-button:hover {
+    background: #292970;
+}
+
+.join-request-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.join-request-success {
+    padding: 14px;
+    border-radius: 9px;
+    background: #edf8f0;
+    color: #246b3b;
+}
+
+.join-request-success p {
+    margin: 6px 0 0;
+}
+
+.join-request-error {
+    color: #c0392b;
+    font-size: 13px;
+    margin: 8px 0 0;
+}
+
+.recommended-students-section,
+.invitation-history-section {
+    margin-top: 24px;
+}
+
+.recommended-students-list,
+.invitation-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.recommended-student,
+.invitation-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.recommended-student h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.recommended-student p,
+.invitation-history-item p {
+    margin: 5px 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.recommended-student strong {
+    display: inline-block;
+    margin-top: 8px;
+    color: #4f46e5;
+}
+
+.invitation-history-item strong {
+    font-size: 14px;
+}
+
+.invitation-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.invitation-status.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.invitation-status.accepted {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.invitation-status.rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+@media (max-width: 600px) {
+
+    .recommended-student,
+    .invitation-history-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

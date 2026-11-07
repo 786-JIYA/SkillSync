@@ -107,10 +107,12 @@ function CreateProject() {
                 projectData
             );
 
-            const projectId = result.data?.project?.id;
+            const teamId = result.data?.project?.team?.id;
 
-            if (projectId) {
-                navigate(`/projects/${projectId}`);
+
+
+            if (teamId) {
+                navigate(`/teams/${teamId}/invitations`);
             } else {
                 navigate("/projects");
             }

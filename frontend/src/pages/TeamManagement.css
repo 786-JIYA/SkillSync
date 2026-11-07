@@ -1,0 +1,263 @@
+.team-management-page {
+    min-height: 100vh;
+    padding: 40px 7%;
+    background: #f6f7fb;
+    color: #20243a;
+}
+
+.team-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.team-back-link {
+    color: #626b85;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.team-eyebrow {
+    margin: 22px 0 8px;
+    color: #626bce;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.team-management-header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #171c35;
+}
+
+.team-subtitle,
+.team-section-heading p {
+    color: #7a8198;
+    margin-top: 8px;
+}
+
+.team-status,
+.team-member-badge {
+    padding: 7px 13px;
+    border-radius: 20px;
+    background: #e9eaff;
+    color: #5056b5;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.team-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.team-overview-card,
+.team-management-section,
+.team-danger-section {
+    background: white;
+    border: 1px solid #e9eaf1;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.team-overview-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.team-card-label {
+    color: #7a8198;
+    font-size: 13px;
+}
+
+.team-overview-card strong {
+    color: #20243a;
+    font-size: 25px;
+}
+
+.team-management-section {
+    margin-bottom: 24px;
+}
+
+.team-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.team-section-heading h2,
+.team-danger-section h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+.team-section-heading p,
+.team-danger-section p {
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.team-member-list {
+    display: grid;
+    gap: 12px;
+}
+
+.team-member-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #edf0f5;
+    border-radius: 11px;
+}
+
+.team-member-avatar,
+.team-action-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #eceeff;
+    color: #5159bd;
+    font-weight: 700;
+}
+
+.team-member-info {
+    flex: 1;
+}
+
+.team-member-info h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.team-member-info p {
+    margin: 5px 0 0;
+    color: #858ba0;
+    font-size: 12px;
+}
+
+.team-action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.team-action-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    border: 1px solid #e9eaf1;
+    border-radius: 12px;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.team-action-card:hover {
+    border-color: #8589dc;
+    transform: translateY(-2px);
+}
+
+.team-action-card div {
+    flex: 1;
+}
+
+.team-action-card h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.team-action-card p {
+    margin: 6px 0 0;
+    color: #858ba0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.team-danger-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-color: #f1dede;
+}
+
+.team-danger-section button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #c94d58;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.team-danger-section button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.team-error {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border-radius: 9px;
+    background: #fff0f0;
+    color: #b42332;
+}
+
+.team-management-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: #626b85;
+}
+
+.team-management-state button {
+    margin-top: 12px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #5056b5;
+    color: white;
+    cursor: pointer;
+}
+
+.team-empty {
+    color: #858ba0;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 700px) {
+    .team-management-page {
+        padding: 25px 5%;
+    }
+
+    .team-management-header {
+        flex-direction: column;
+    }
+
+    .team-overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-danger-section {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

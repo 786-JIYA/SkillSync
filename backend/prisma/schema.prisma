@@ -138,14 +138,16 @@ enum InvitationStatus {
   CANCELLED
 }
 
+
 model Invitation {
-  id        String           @id @default(cuid())
-  teamId    String           @map("team_id")
-  inviterId String           @map("inviter_id")
-  inviteeId String           @map("invitee_id")
-  status    InvitationStatus @default(PENDING)
-  createdAt DateTime         @default(now()) @map("created_at")
-  updatedAt DateTime         @updatedAt @map("updated_at")
+  id          String           @id @default(cuid())
+  teamId      String           @map("team_id")
+  inviterId   String           @map("inviter_id")
+  inviteeId   String           @map("invitee_id")
+  status      InvitationStatus @default(PENDING)
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  respondedAt DateTime?        @map("responded_at")
 
   team    Team    @relation(fields: [teamId], references: [id], onDelete: Cascade)
   inviter Student @relation("SentInvitations", fields: [inviterId], references: [id], onDelete: Cascade)
@@ -164,13 +166,14 @@ enum JoinRequestStatus {
 }
 
 model JoinRequest {
-  id        String            @id @default(cuid())
-  teamId    String            @map("team_id")
-  studentId String            @map("student_id")
-  status    JoinRequestStatus @default(PENDING)
-  message   String?
-  createdAt DateTime          @default(now()) @map("created_at")
-  updatedAt DateTime          @updatedAt @map("updated_at")
+  id          String            @id @default(cuid())
+  teamId      String            @map("team_id")
+  studentId   String            @map("student_id")
+  status      JoinRequestStatus @default(PENDING)
+  message     String?
+  createdAt   DateTime          @default(now()) @map("created_at")
+  updatedAt   DateTime          @updatedAt @map("updated_at")
+  respondedAt DateTime?         @map("responded_at")
 
   team    Team    @relation(fields: [teamId], references: [id], onDelete: Cascade)
   student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)

@@ -42,6 +42,10 @@ export const projectService = {
         );
     },
 
+    getMyProjects(token) {
+        return request("/projects/me", token);
+    },
+
     getProjectById(token, projectId) {
         return request(
             `/projects/${encodeURIComponent(projectId)}`,
@@ -77,4 +81,6 @@ export const projectService = {
             }
         );
     },
+
 };
+

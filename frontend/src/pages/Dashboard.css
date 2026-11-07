@@ -514,3 +514,17 @@ button.overview-card:hover {
         margin-left: 0;
     }
 }
+
+
+.profile-view-button {
+    border: none;
+    background: transparent;
+    color: #5056b5;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.topbar-profile {
+    cursor: pointer;
+}

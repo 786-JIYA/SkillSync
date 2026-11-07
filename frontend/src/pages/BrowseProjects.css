@@ -426,3 +426,136 @@
         padding: 0 18px;
     }
 }
+
+
+
+/* Recommended Projects */
+
+.recommended-section {
+    margin-bottom: 35px;
+}
+
+.recommended-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.recommended-heading h2 {
+    font-size: 19px;
+    color: #20243a;
+}
+
+.recommended-heading p {
+    color: #85899a;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.recommended-badge {
+    background: #eeeaff;
+    color: #695bd0;
+    padding: 7px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.recommended-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.recommended-card {
+    background: white;
+    border: 1px solid #e9e6fb;
+    border-radius: 13px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recommended-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 25px #27244b12;
+}
+
+.recommended-score {
+    color: #695bd0;
+    background: #eeeaff;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    align-self: flex-start;
+}
+
+.recommended-card h3 {
+    font-size: 16px;
+    margin: 16px 0 10px;
+}
+
+.recommended-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 12px 0;
+}
+
+.recommended-skills span {
+    background: #f0edff;
+    color: #695bd0;
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+.recommended-explanation {
+    color: #85899a;
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 8px 0 16px;
+}
+
+.recommended-card button {
+    margin-top: auto;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #7564df;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.recommended-loading,
+.recommended-error,
+.recommended-empty {
+    background: white;
+    border: 1px solid #ececf3;
+    border-radius: 12px;
+    padding: 22px;
+    color: #85899a;
+    font-size: 13px;
+}
+
+.recommended-error {
+    color: #c04444;
+}
+
+@media (max-width: 1100px) {
+    .recommended-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 750px) {
+    .recommended-grid {
+        grid-template-columns: 1fr;
+    }
+}
