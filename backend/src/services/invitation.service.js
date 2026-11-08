@@ -1,6 +1,7 @@
 
 const { Prisma } = require("@prisma/client");
 const prisma = require("../lib/prisma");
+const { sendEmail } = require("./email.service");
 
 // CUSTOM ERROR
 const createError = (message, statusCode, code) => {
@@ -77,7 +78,11 @@ const createInvitation = async (teamId, inviterId, inviteeId) => {
     // 4. Check whether the invitee exists.
     const invitee = await prisma.student.findUnique({
         where: { id: inviteeId },
-        select: { id: true },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+        },
     });
 
     if (!invitee) {
@@ -136,8 +141,10 @@ const createInvitation = async (teamId, inviterId, inviteeId) => {
 
     // 8. Create invitation.
     // The database partial unique index protects against concurrent requests.
+    let invitation;
+
     try {
-        return await prisma.invitation.create({
+        invitation = await prisma.invitation.create({
             data: {
                 teamId,
                 inviterId,
@@ -163,6 +170,23 @@ const createInvitation = async (teamId, inviterId, inviteeId) => {
 
         throw error;
     }
+
+    // 9. Send invitation email.
+    await sendEmail({
+        to: invitee.email,
+        subject: "New Team Invitation - SkillSync",
+        text: `Hello ${invitee.name},
+
+You have received a team invitation on SkillSync.
+
+Log in to your SkillSync account to view and respond to the invitation.
+
+Regards,
+SkillSync Team`,
+    });
+
+    // 10. Return invitation.
+    return invitation;
 };
 
 
@@ -298,7 +322,6 @@ const getTeamInvitations = async (teamId, requesterId) => {
 };
 
 
-// RESPOND TO INVITATION
 // RESPOND TO INVITATION
 const respondToInvitation = async (
     invitationId,
